@@ -111,7 +111,6 @@ def parse_game_revenue_data(api_json,result={}):
     
     return result
 
-
 def parse_ugc_revenue_data(api_json,result={}):
     """Converts api json data into python dict
 
