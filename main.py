@@ -98,7 +98,7 @@ def parse_game_revenue_data(api_json,result={}):
     Returns:
         dict[string,integer]: Dictionary of data retrieved from api json [date,value]
     """
-    for i in range(len(api_json["operation"]["queryResult"]["values"])): # kinda got lazy and messy here
+    for i in range(len(api_json["operation"]["queryResult"]["values"])): 
         data_points = api_json["operation"]["queryResult"]["values"][i]["dataPoints"]
         for point in data_points:
             time = point["time"][0:10]
@@ -202,9 +202,9 @@ def main(): # Yes this is all messy, I kinda speed ran it cuz I have very limite
             games_timestamps = games_graph_data.keys()
             ugc_timestamps = ugc_graph_data.keys()
             
-            total_graph_data.update(games_graph_data)
+            total_graph_data.update(games_graph_data) # Merge games graph data into total
                     
-            for timestamp in total_graph_data.keys():
+            for timestamp in total_graph_data.keys(): # Set any missing graph data to 0 for a better look on plots
                 if not timestamp in games_timestamps:
                     games_graph_data[timestamp] = 0
                 
@@ -214,7 +214,7 @@ def main(): # Yes this is all messy, I kinda speed ran it cuz I have very limite
             total_revenue = sum(total_graph_data.values())
             average_revenue = total_revenue // max(len(total_graph_data.keys()),1)
             
-            if total_revenue > 0:
+            if total_revenue > 0: # Only display graph if game has revenue 
                 plt.figure(group_name)
                 plt.plot(list(ugc_graph_data.keys()),list(ugc_graph_data.values()),label = "UGC Revenue")
                 plt.plot(list(games_graph_data.keys()),list(games_graph_data.values()),label = "Games Revenue")
@@ -224,9 +224,10 @@ def main(): # Yes this is all messy, I kinda speed ran it cuz I have very limite
                 plt.ylabel("Robux Earned")
                 plt.title(f"Average over selected period: {average_revenue} | Total over selected period: {total_revenue}")
                 
+                timestamps = total_graph_data.keys()
                 plt.xticks( # I had to look this part up cuz I've used matplotlib like 4 times ever in my life LOL idk ts
-                    ticks=range(len(games_timestamps)),
-                    labels=[key if i % 3 == 0 else '' for i, key in enumerate(games_timestamps)],
+                    ticks=range(len(timestamps)),
+                    labels=[key if i % (3) == 0 else '' for i, key in enumerate(timestamps)],
                     rotation=45, ha='right'
                 )
                 
