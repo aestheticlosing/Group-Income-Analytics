@@ -15,7 +15,6 @@ HEADERS = { # I'm ngl this should probably remain constant through any API calls
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
     "Accept":"*/*"
 }
-CALL_INTERVAL = 0.077
 
 csrf_token = "" # csrf_token variable to be used later
 last = 0
@@ -39,6 +38,12 @@ def make_post_request(url : str, cookies : dict, payload : dict, fetched=False):
     """
     global last
     global csrf_token # Haven't done this in a while
+    
+    current_time = time.time()
+    
+    if last > 0:
+        print(f"Time since last API call: {current_time - last} seconds, URL: {url}")
+    last = current_time
         
     header = HEADERS.copy()
     header["X-CSRF-TOKEN"] = csrf_token
