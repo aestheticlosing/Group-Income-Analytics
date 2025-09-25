@@ -12,7 +12,7 @@ import os
 from datetime import date
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path="Roblox-Game-Income-Analytics/data/user_info.env")
+load_dotenv(dotenv_path="Group-Income-Analytics/data/user_info.env")
 
 # Variables 
 COOKIE = os.getenv("COOKIE") # Get user cookie from user info csv file.
