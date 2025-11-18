@@ -16,7 +16,6 @@ load_dotenv(dotenv_path="Group-Income-Analytics/data/user_info.env")
 
 # Variables 
 COOKIE = os.getenv("COOKIE") # Get user cookie from user info csv file.
-UNIVERSE_ID = "8092895878" # UNIVERSE ID (this is like the most simple api request to get so don't discredit me on this for being lazy) (https://apis.roblox.com/universes/v1/places/INSERT_PLACE_ID_HERE_IM_LAZY_LOL/universe)
 START_DATE = "2025-08-18" # just some random start date ig (not really important for now)
 END_DATE = date.today().strftime("%Y-%m-%d") # current date
 
